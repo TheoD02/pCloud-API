@@ -2,6 +2,8 @@
 
 namespace App\PCloud\Schema\Core;
 
+use App\PCloud\Schema\Output\CommonSchema\BaseFileSchema;
+use App\PCloud\Schema\Output\CommonSchema\BaseFolderSchema;
 use DateTime;
 use ReflectionObject;
 
@@ -28,9 +30,8 @@ trait OutputSchemaTrait
                     };
                     if ('array' === $parameter->getType()?->getName()) {
                         if ($method->getAttributes()) {
-                            $obj = $method->getAttributes()[0]->getName();
                             foreach ($data as $k => $d) {
-                                $dataObj = new $obj();
+                                $dataObj = $d['isfolder'] ? new BaseFolderSchema() : new BaseFileSchema();
                                 $data[$k] = $dataObj->setDataFromResponse($d);
                             }
                         }

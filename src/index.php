@@ -3,18 +3,19 @@
 namespace App;
 
 use App\PCloud\Schema\Input\File\DeleteFile\DeleteFileWithFileIdInput;
+use App\PCloud\Schema\Input\File\DeleteFile\DeleteFileWithFilePathInput;
 use App\PCloud\Schema\Input\File\PCloudFile;
 use App\PCloud\Schema\Input\File\UploadFile\UploadFileWithFolderIdInput;
+use App\PCloud\Schema\Input\Folder\ListFolder\ListFolderWithIdInput;
 use App\Service\PCloudService;
+use Symfony\Component\Dotenv\Dotenv;
 
 require './vendor/autoload.php';
+$dotenv = new Dotenv();
+$dotenv->load(dirname(__DIR__) . '/.env.local');
 
 $p = new PCloudService($_ENV['PCLOUD_EMAIL'], $_ENV['PCLOUD_PASSWORD']);
-$upload = new UploadFileWithFolderIdInput(
-    [
-        new PCloudFile('C:\Users\Administrator\Music\TRIE 2020 (SEPTEMBRE)\BASS MUSIC\04 - Eurythmics - Sweat Dreams (Robin Felix Bootleg) (Chocolate Puma & Firebeatz) - 5A - 126.mp3', 'tie la fafa.mp3')
-    ]
-);
-$res = $p->uploadFile($upload);
-$p->uploadFile(new UploadFileWithFolderIdInput());
+$res = $p->listFolder(new ListFolderWithIdInput(0), noFiles: false)->getContents();
+$last = end($res);
+$p->deleteFile(new DeleteFileWithFileIdInput($last->getFileId()));
 die;

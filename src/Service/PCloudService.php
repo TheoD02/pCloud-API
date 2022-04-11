@@ -13,7 +13,6 @@ use App\PCloud\Adapters\DeleteFileInterface;
 use App\PCloud\Adapters\DeleteFolderInterface;
 use App\PCloud\Adapters\ListFolderInterface;
 use App\PCloud\Adapters\UploadFileInterface;
-use App\PCloud\Schema\Output\File\DeleteFileOutput;
 use App\PCloud\Schema\Output\File\UploadFileOutput;
 use App\PCloud\Schema\Output\Folder\CreateFolderOutput;
 use App\PCloud\Schema\Output\Folder\DeleteFolderOutput;
@@ -40,13 +39,21 @@ class PCloudService
         }
     }
 
+    /**
+     * @return UserInfoScheme|null
+     */
+    public function getUserInfo(): ?UserInfoScheme
+    {
+        return $this->userInfo;
+    }
+
     private function request(string $method, PCloudMethods $pCloudMethods, $options)
     {
         if (true === $this->haveAlreadyAttemptLogin && null === $this->userInfo->getAuth()) {
             throw new NotLoggedException('Not logged to pCloud API! Check credentials or API Server.');
         }
         if ($this->userInfo->getAuth()) {
-            $options['query'] = ['auth' => $this->userInfo->getAuth()];
+            $options['form_params']['auth'] = $this->userInfo->getAuth();
         }
         $data = json_decode($this->client->request($method, $pCloudMethods->value, $options)->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
         if (0 !== $data['result']) {
