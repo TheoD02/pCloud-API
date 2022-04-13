@@ -15,7 +15,7 @@ class PCloudFile
      */
     public function __construct(
         $contentOrStream,
-        private string $filename,
+        private ?string $filename = null,
         private ?string $path = null,
         //private ?bool $renameIfExist = true,
         //private ?bool $noPartial = true,
@@ -54,7 +54,7 @@ class PCloudFile
     /**
      * @return string
      */
-    public function getFilename(): string
+    public function getFilename(): ?string
     {
         return $this->filename;
     }
@@ -63,7 +63,7 @@ class PCloudFile
      * @param string $filename
      * @return PCloudFile
      */
-    public function setFilename(string $filename): PCloudFile
+    public function setFilename(?string $filename): PCloudFile
     {
         $this->filename = $filename;
         return $this;

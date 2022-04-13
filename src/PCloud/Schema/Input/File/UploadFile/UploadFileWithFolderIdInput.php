@@ -6,52 +6,16 @@ use App\PCloud\Adapters\UploadFileInterface;
 use App\PCloud\Schema\Core\InputSchemaTrait;
 use App\PCloud\Schema\Input\File\PCloudFile;
 
-class UploadFileWithFolderIdInput implements UploadFileInterface
+class UploadFileWithFolderIdInput extends BaseUploadFileInput implements UploadFileInterface
 {
-    use InputSchemaTrait;
-
     public function __construct(
-        protected array $files = [],
-        protected int   $folderId = 0,
+        protected int $folderId = 0,
+        array         $files = []
     )
     {
+        parent::__construct($files);
     }
 
-    /**
-     * @return PCloudFile[]
-     */
-    public function getFiles(): array
-    {
-        $files = [];
-        foreach ($this->files as $k => $file) {
-            $files[$k] = [
-                'name' => "file-$k",
-                'contents' => is_resource($file->getContents()) ? $file->getContents() : fopen($file->getContents(), 'rb+'),
-                'filename' => $file->getFilename(),
-            ];
-        }
-        return $files;
-    }
-
-    /**
-     * @param PCloudFile[] $files
-     * @return UploadFileWithFolderIdInput
-     */
-    public function setFiles(array $files): UploadFileWithFolderIdInput
-    {
-        $this->files = $files;
-        return $this;
-    }
-
-    /**
-     * @param PCloudFile $file
-     * @return UploadFileWithFolderIdInput
-     */
-    public function addFile(PCloudFile $file): UploadFileWithFolderIdInput
-    {
-        $this->files[] = $file;
-        return $this;
-    }
 
     /**
      * @return int
