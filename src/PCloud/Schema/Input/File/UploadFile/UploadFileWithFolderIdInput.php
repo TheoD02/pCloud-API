@@ -3,8 +3,6 @@
 namespace App\PCloud\Schema\Input\File\UploadFile;
 
 use App\PCloud\Adapters\UploadFileInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
-use App\PCloud\Schema\Input\File\PCloudFile;
 
 class UploadFileWithFolderIdInput extends BaseUploadFileInput implements UploadFileInterface
 {
@@ -33,5 +31,10 @@ class UploadFileWithFolderIdInput extends BaseUploadFileInput implements UploadF
     {
         $this->folderId = $folderId;
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [['name' => 'folderid', 'contents' => $this->folderId], ...$this->getFiles()];
     }
 }

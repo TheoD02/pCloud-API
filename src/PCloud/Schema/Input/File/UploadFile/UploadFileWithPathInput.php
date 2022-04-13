@@ -3,8 +3,6 @@
 namespace App\PCloud\Schema\Input\File\UploadFile;
 
 use App\PCloud\Adapters\UploadFileInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
-use App\PCloud\Schema\Input\File\PCloudFile;
 
 class UploadFileWithPathInput extends BaseUploadFileInput implements UploadFileInterface
 {
@@ -32,5 +30,10 @@ class UploadFileWithPathInput extends BaseUploadFileInput implements UploadFileI
     {
         $this->path = $path;
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [['name' => 'path', 'contents' => $this->path], ...$this->getFiles()];
     }
 }
