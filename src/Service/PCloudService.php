@@ -14,6 +14,7 @@ use App\PCloud\Adapters\DeleteFolderInterface;
 use App\PCloud\Adapters\ListFolderInterface;
 use App\PCloud\Adapters\StreamAudioInterface;
 use App\PCloud\Adapters\UploadFileInterface;
+use App\PCloud\Schema\Output\File\DeleteFileOutput;
 use App\PCloud\Schema\Output\File\UploadFileOutput;
 use App\PCloud\Schema\Output\Folder\CreateFolderOutput;
 use App\PCloud\Schema\Output\Folder\DeleteFolderOutput;
@@ -55,7 +56,7 @@ class PCloudService
             throw new NotLoggedException('Not logged to pCloud API! Check credentials or API Server.');
         }
         if ($this->userInfo->getAuth()) {
-            $options['form_params']['auth'] = $this->userInfo->getAuth();
+            $options['query']['auth'] = $this->userInfo->getAuth();
         }
         $data = json_decode($this->client->request($method, $pCloudMethods->value, $options)->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
         if (0 !== $data['result']) {
@@ -128,20 +129,19 @@ class PCloudService
         );
     }
 
-    public function deleteFile(DeleteFileInterface $deleteFileInput): void
+    public function deleteFile(DeleteFileInterface $deleteFileInput)
     {
-        var_dump($this->request('POST', PCloudMethods::DELETE_FILE, ['form_params' => ['fileid' => 12366591974]]));
+        return (new DeleteFileOutput())->setDataFromResponse(
+            $this->request('POST', PCloudMethods::DELETE_FILE, ['form_params' => $deleteFileInput->toArray()])
+        );
     }
 
     public function streamAudioLink(StreamAudioInterface $streamAudioInput)
     {
-        $response = (new StreamAudioOutput())->setDataFromResponse(
+        return (new StreamAudioOutput())->setDataFromResponse(
             $this->request('POST', PCloudMethods::GET_AUDIO_LINK, [
                 'form_params' => $streamAudioInput->toArray(),
             ])
         );
-        header('Location: ' . $response->getBestUrl());
-        exit;
-        dd($response, current($response['hosts']) . $response['path']);
     }
 }
