@@ -24,7 +24,13 @@ class PCloudFile
         //private ?int $creationTimestamp = null,
     )
     {
-        $this->contents = $contentOrStream;
+        if (is_resource($contentOrStream)) {
+            $this->contents = $contentOrStream;
+        } else if (is_file($contentOrStream)) {
+            $this->contents = fopen($contentOrStream, 'rb+');
+        } else {
+            throw new \Exception('Not supported yet, need maybe improve here.');
+        }
     }
 
     /**
