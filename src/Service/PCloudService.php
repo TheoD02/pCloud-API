@@ -124,6 +124,7 @@ class PCloudService
         }
         return (new UploadFileOutput())->setDataFromResponse(
             $this->request('POST', PCloudMethods::UPLOAD_FILE, [
+                'query' => $uploadFileInput->toArray(),
                 'multipart' => $uploadFileInput->getFiles(),
             ])
         );
