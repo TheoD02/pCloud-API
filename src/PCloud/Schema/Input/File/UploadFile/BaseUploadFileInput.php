@@ -25,10 +25,8 @@ class BaseUploadFileInput
             $files[$k] = [
                 'name' => "file-$k",
                 'contents' => is_resource($file->getContents()) ? $file->getContents() : fopen($file->getContents(), 'rb+'),
+                'filename' => method_exists($this, 'getPath') ? sprintf('%s/%s', $this->getPath(), $file->getFilename()) : $file->getFilename()
             ];
-            if ($file->getFilename()) {
-                $files[$k]['filename'] = sprintf('%s/%s', $this->getPath(), $file->getFilename());
-            }
         }
         return $files;
     }

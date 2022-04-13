@@ -15,7 +15,7 @@ class PCloudFile
      */
     public function __construct(
         $contentOrStream,
-        private ?string $filename = null,
+        private string $filename = null,
         private ?string $path = null,
         //private ?bool $renameIfExist = true,
         //private ?bool $noPartial = true,
@@ -24,13 +24,7 @@ class PCloudFile
         //private ?int $creationTimestamp = null,
     )
     {
-        if (is_resource($contentOrStream)) {
-            $this->contents = $contentOrStream;
-        } else if (is_file($contentOrStream)) {
-            $this->contents = fopen($contentOrStream, 'rb+');
-        } else {
-            throw new \Exception('Not supported yet, need maybe improve here.');
-        }
+        $this->contents = $contentOrStream;
     }
 
     /**
@@ -54,7 +48,7 @@ class PCloudFile
     /**
      * @return string
      */
-    public function getFilename(): ?string
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -63,7 +57,7 @@ class PCloudFile
      * @param string $filename
      * @return PCloudFile
      */
-    public function setFilename(?string $filename): PCloudFile
+    public function setFilename(string $filename): PCloudFile
     {
         $this->filename = $filename;
         return $this;
