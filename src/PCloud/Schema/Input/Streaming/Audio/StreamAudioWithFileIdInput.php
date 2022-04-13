@@ -2,19 +2,28 @@
 
 namespace App\PCloud\Schema\Input\Streaming\Audio;
 
+use App\PCloud\Adapters\StreamAudioInterface;
 use App\PCloud\Schema\Core\InputSchemaTrait;
 
-class StreamAudioWithFileIdInput
+class StreamAudioWithFileIdInput implements StreamAudioInterface
 {
     use InputSchemaTrait;
 
+    private bool $forceDownload;
+
     public function __construct(
-        private int    $fileId,
-        private bool   $forceDownload = false,
-        private string $contentType = 'audio/mpeg',
-        private int    $bitrate = 320,
+        private int     $fileId,
+        private int     $bitrate = 320,
+        private ?string $contentType = null,
+        bool            $forceDownload = false,
     )
     {
+        $this->forceDownload = $forceDownload;
+        if ($forceDownload) {
+            $this->contentType = 'application/octet-stream';
+        } else if ($this->contentType === 'application/octet-stream') {
+            $this->contentType = null;
+        }
     }
 
     /**
@@ -56,7 +65,7 @@ class StreamAudioWithFileIdInput
     /**
      * @return string
      */
-    public function getContentType(): string
+    public function getContentType(): ?string
     {
         return $this->contentType;
     }
@@ -65,7 +74,7 @@ class StreamAudioWithFileIdInput
      * @param string $contentType
      * @return StreamFileLinkWithFileIdInput
      */
-    public function setContentType(string $contentType): StreamFileLinkWithFileIdInput
+    public function setContentType(?string $contentType): StreamFileLinkWithFileIdInput
     {
         $this->contentType = $contentType;
         return $this;

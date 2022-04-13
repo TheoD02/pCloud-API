@@ -8,14 +8,22 @@ class StreamFileWithFileIdInput
 {
     use InputSchemaTrait;
 
+    private bool $forceDownload;
+
     public function __construct(
         private int    $folderId,
         private string $contentType,
-        private bool   $forceDownload = false,
         private ?int   $maxSpeed = null,
         private bool   $skipFilename = false,
+        bool           $forceDownload = false,
     )
     {
+        $this->forceDownload = $forceDownload;
+        if ($forceDownload) {
+            $this->contentType = 'application/octet-stream';
+        } else if ($this->contentType === 'application/octet-stream') {
+            $this->contentType = null;
+        }
     }
 
     /**

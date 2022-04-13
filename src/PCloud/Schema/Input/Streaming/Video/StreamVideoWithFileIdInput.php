@@ -8,9 +8,11 @@ class StreamVideoWithFileIdInput
 {
     use InputSchemaTrait;
 
+    private bool $forceDownload;
+
     public function __construct(
         private int     $fileId,
-        private bool    $forceDownload = false,
+        bool            $forceDownload = false,
         private ?string $contentType = null,
         private ?int    $maxSpeed = null,
         private bool    $skipFilename = false,
@@ -20,6 +22,12 @@ class StreamVideoWithFileIdInput
         private bool    $fixedBitrate = true,
     )
     {
+        $this->forceDownload = $forceDownload;
+        if ($forceDownload) {
+            $this->contentType = 'application/octet-stream';
+        } else if ($this->contentType === 'application/octet-stream') {
+            $this->contentType = null;
+        }
     }
 
     /**

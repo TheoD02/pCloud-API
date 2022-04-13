@@ -8,14 +8,22 @@ class StreamTextFileWithFileIdInput
 {
     use InputSchemaTrait;
 
+    private bool $forceDownload;
+
     public function __construct(
-        private int $folderId,
+        private int    $folderId,
         private string $fromEncoding = 'guess',
         private string $toEncoding = 'utf-8',
-        private bool $forceDownload = false,
+        bool           $forceDownload = false,
         private string $contentType = 'text/plain',
     )
     {
+        $this->forceDownload = $forceDownload;
+        if ($forceDownload) {
+            $this->contentType = 'application/octet-stream';
+        } else if ($this->contentType === 'application/octet-stream') {
+            $this->contentType = null;
+        }
     }
 
     /**

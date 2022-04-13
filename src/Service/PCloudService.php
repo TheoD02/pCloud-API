@@ -12,11 +12,13 @@ use App\PCloud\Adapters\CreateFolderInterface;
 use App\PCloud\Adapters\DeleteFileInterface;
 use App\PCloud\Adapters\DeleteFolderInterface;
 use App\PCloud\Adapters\ListFolderInterface;
+use App\PCloud\Adapters\StreamAudioInterface;
 use App\PCloud\Adapters\UploadFileInterface;
 use App\PCloud\Schema\Output\File\UploadFileOutput;
 use App\PCloud\Schema\Output\Folder\CreateFolderOutput;
 use App\PCloud\Schema\Output\Folder\DeleteFolderOutput;
 use App\PCloud\Schema\Output\Folder\ListFolderOutput;
+use App\PCloud\Schema\Output\Streaming\Audio\StreamAudioOutput;
 use App\PCloud\Schema\Output\UserInfoScheme;
 use GuzzleHttp\Client;
 
@@ -129,5 +131,17 @@ class PCloudService
     public function deleteFile(DeleteFileInterface $deleteFileInput): void
     {
         var_dump($this->request('POST', PCloudMethods::DELETE_FILE, ['form_params' => ['fileid' => 12366591974]]));
+    }
+
+    public function streamAudioLink(StreamAudioInterface $streamAudioInput)
+    {
+        $response = (new StreamAudioOutput())->setDataFromResponse(
+            $this->request('POST', PCloudMethods::GET_AUDIO_LINK, [
+                'form_params' => $streamAudioInput->toArray(),
+            ])
+        );
+        header('Location: ' . $response->getBestUrl());
+        exit;
+        dd($response, current($response['hosts']) . $response['path']);
     }
 }
