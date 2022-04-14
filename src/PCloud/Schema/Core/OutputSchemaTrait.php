@@ -2,6 +2,7 @@
 
 namespace PCloud\PCloud\Schema\Core;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PCloud\PCloud\Schema\Output\CommonSchema\BaseFileSchema;
 use PCloud\PCloud\Schema\Output\CommonSchema\BaseFolderSchema;
 use DateTime;
@@ -17,7 +18,7 @@ trait OutputSchemaTrait
                 $parameter = current($method->getParameters());
                 $data = $responseData['metadata'][strtolower($parameter->getName())] ?? $responseData[strtolower($parameter->getName())] ?? null;
                 if (null !== $data) {
-                    if (!in_array($parameter->getType()?->getName(), ['bool', 'string', 'int', 'DateTime', 'array'])) {
+                    if (!in_array($parameter->getType()?->getName(), ['bool', 'string', 'int', 'DateTime', 'array', 'Doctrine\Common\Collections\ArrayCollection'])) {
                         var_dump($parameter->getType()->getName());
                         die; // TODO : Remove debug
                     }
