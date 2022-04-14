@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Input;
+namespace PCloud\PCloud\Schema\Input;
 
-use App\Utils\ArrayUtils;
+use PCloud\Utils\ArrayUtils;
 
 class Tree
 {

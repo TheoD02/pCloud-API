@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PCloud\Schema\Input\File;
+namespace PCloud\PCloud\Schema\Input\File;
 
 class PCloudFile
 {

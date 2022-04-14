@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Input\File\DeleteFile;
+namespace PCloud\PCloud\Schema\Input\File\DeleteFile;
 
-use App\PCloud\Adapters\DeleteFileInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Adapters\DeleteFileInterface;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class DeleteFileWithFileIdInput implements DeleteFileInterface
 {

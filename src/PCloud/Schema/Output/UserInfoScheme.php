@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Output;
+namespace PCloud\PCloud\Schema\Output;
 
-use App\PCloud\Schema\Core\OutputSchemaTrait;
+use PCloud\PCloud\Schema\Core\OutputSchemaTrait;
 use DateTime;
 
 class UserInfoScheme

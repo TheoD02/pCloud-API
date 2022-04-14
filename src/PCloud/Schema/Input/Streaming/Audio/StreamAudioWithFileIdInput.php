@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Streaming\Audio;
+namespace PCloud\PCloud\Schema\Input\Streaming\Audio;
 
-use App\PCloud\Adapters\StreamAudioInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Adapters\StreamAudioInterface;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class StreamAudioWithFileIdInput implements StreamAudioInterface
 {

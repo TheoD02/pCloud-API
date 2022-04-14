@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PCloud\Adapters;
+namespace PCloud\PCloud\Adapters;
 
 interface StreamTextInterface
 {

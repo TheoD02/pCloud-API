@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace PCloud\Exceptions;
 
 use Exception;
 

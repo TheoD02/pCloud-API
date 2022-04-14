@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Core;
+namespace PCloud\PCloud\Schema\Core;
 
-use App\PCloud\Schema\Output\CommonSchema\BaseFileSchema;
-use App\PCloud\Schema\Output\CommonSchema\BaseFolderSchema;
+use PCloud\PCloud\Schema\Output\CommonSchema\BaseFileSchema;
+use PCloud\PCloud\Schema\Output\CommonSchema\BaseFolderSchema;
 use DateTime;
 use ReflectionObject;
 

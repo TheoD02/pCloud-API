@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Streaming\Video;
+namespace PCloud\PCloud\Schema\Input\Streaming\Video;
 
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class StreamVideoWithFolderPathInput
 {

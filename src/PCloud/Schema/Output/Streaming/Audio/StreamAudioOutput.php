@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Output\Streaming\Audio;
+namespace PCloud\PCloud\Schema\Output\Streaming\Audio;
 
-use App\PCloud\Schema\Core\OutputSchemaTrait;
+use PCloud\PCloud\Schema\Core\OutputSchemaTrait;
 
 class StreamAudioOutput
 {

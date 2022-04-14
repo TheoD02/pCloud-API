@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Streaming\Text;
+namespace PCloud\PCloud\Schema\Input\Streaming\Text;
 
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class StreamTextFileWithFilePathInput
 {

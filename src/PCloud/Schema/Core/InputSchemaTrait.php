@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PCloud\Schema\Core;
+namespace PCloud\PCloud\Schema\Core;
 
 use ReflectionObject;
 

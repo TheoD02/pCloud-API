@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\PCloud\Schema\Input\File\PCloudFile;
-use App\PCloud\Schema\Input\File\UploadFile\UploadFileWithPathInput;
-use App\Service\PCloudService;
+use PCloud\PCloud\Schema\Input\File\PCloudFile;
+use PCloud\PCloud\Schema\Input\File\UploadFile\UploadFileWithPathInput;
+use PCloud\Service\PCloudService;
 use Symfony\Component\Dotenv\Dotenv;
 
 require '../vendor/autoload.php';

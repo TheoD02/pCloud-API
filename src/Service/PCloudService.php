@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Service;
+namespace PCloud\Service;
 
-use App\Client\HttpClientSingleton;
-use App\Enum\PCloudMethods;
-use App\Enum\PCloudServer;
-use App\Exceptions\NoFileToUploadException;
-use App\Exceptions\NotLoggedException;
-use App\Exceptions\PCloudApiError;
-use App\PCloud\Adapters\CreateFolderInterface;
-use App\PCloud\Adapters\DeleteFileInterface;
-use App\PCloud\Adapters\DeleteFolderInterface;
-use App\PCloud\Adapters\ListFolderInterface;
-use App\PCloud\Adapters\StreamAudioInterface;
-use App\PCloud\Adapters\UploadFileInterface;
-use App\PCloud\Schema\Output\File\DeleteFileOutput;
-use App\PCloud\Schema\Output\File\UploadFileOutput;
-use App\PCloud\Schema\Output\Folder\CreateFolderOutput;
-use App\PCloud\Schema\Output\Folder\DeleteFolderOutput;
-use App\PCloud\Schema\Output\Folder\ListFolderOutput;
-use App\PCloud\Schema\Output\Streaming\Audio\StreamAudioOutput;
-use App\PCloud\Schema\Output\UserInfoScheme;
+use PCloud\Client\HttpClientSingleton;
+use PCloud\Enum\PCloudMethods;
+use PCloud\Enum\PCloudServer;
+use PCloud\Exceptions\NoFileToUploadException;
+use PCloud\Exceptions\NotLoggedException;
+use PCloud\Exceptions\PCloudApiError;
+use PCloud\PCloud\Adapters\CreateFolderInterface;
+use PCloud\PCloud\Adapters\DeleteFileInterface;
+use PCloud\PCloud\Adapters\DeleteFolderInterface;
+use PCloud\PCloud\Adapters\ListFolderInterface;
+use PCloud\PCloud\Adapters\StreamAudioInterface;
+use PCloud\PCloud\Adapters\UploadFileInterface;
+use PCloud\PCloud\Schema\Output\File\DeleteFileOutput;
+use PCloud\PCloud\Schema\Output\File\UploadFileOutput;
+use PCloud\PCloud\Schema\Output\Folder\CreateFolderOutput;
+use PCloud\PCloud\Schema\Output\Folder\DeleteFolderOutput;
+use PCloud\PCloud\Schema\Output\Folder\ListFolderOutput;
+use PCloud\PCloud\Schema\Output\Streaming\Audio\StreamAudioOutput;
+use PCloud\PCloud\Schema\Output\UserInfoScheme;
 use GuzzleHttp\Client;
 
 class PCloudService

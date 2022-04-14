@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Input\File\UploadFile;
+namespace PCloud\PCloud\Schema\Input\File\UploadFile;
 
-use App\PCloud\Schema\Core\InputSchemaTrait;
-use App\PCloud\Schema\Input\File\PCloudFile;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Schema\Input\File\PCloudFile;
 
 class BaseUploadFileInput
 {

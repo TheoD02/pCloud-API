@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Archiving;
+namespace PCloud\PCloud\Schema\Input\Archiving;
 
-use App\PCloud\Schema\Input\Tree;
+use PCloud\PCloud\Schema\Input\Tree;
 
 class ZipLinkInput
 {

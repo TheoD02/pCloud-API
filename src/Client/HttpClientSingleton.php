@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Client;
+namespace PCloud\Client;
 
-use App\Enum\PCloudServer;
+use PCloud\Enum\PCloudServer;
 use GuzzleHttp\Client;
 
 class HttpClientSingleton

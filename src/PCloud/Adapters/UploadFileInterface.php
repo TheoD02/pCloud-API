@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Adapters;
+namespace PCloud\PCloud\Adapters;
 
-use App\PCloud\Schema\Input\File\PCloudFile;
+use PCloud\PCloud\Schema\Input\File\PCloudFile;
 
 interface UploadFileInterface
 {

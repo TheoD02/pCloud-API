@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Folder\Create;
+namespace PCloud\PCloud\Schema\Input\Folder\Create;
 
-use App\PCloud\Adapters\CreateFolderInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Adapters\CreateFolderInterface;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class CreateFolderWithFolderIdInput implements CreateFolderInterface
 {

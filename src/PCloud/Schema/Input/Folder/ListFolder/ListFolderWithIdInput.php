@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Folder\ListFolder;
+namespace PCloud\PCloud\Schema\Input\Folder\ListFolder;
 
-use App\PCloud\Adapters\ListFolderInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Adapters\ListFolderInterface;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class ListFolderWithIdInput implements ListFolderInterface
 {

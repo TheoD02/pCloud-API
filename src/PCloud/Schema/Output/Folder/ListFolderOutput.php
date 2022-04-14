@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Output\Folder;
+namespace PCloud\PCloud\Schema\Output\Folder;
 
-use App\PCloud\Schema\Core\OutputSchemaTrait;
-use App\PCloud\Schema\Output\CommonSchema\BaseFolderSchema;
+use PCloud\PCloud\Schema\Core\OutputSchemaTrait;
+use PCloud\PCloud\Schema\Output\CommonSchema\BaseFolderSchema;
 
 class ListFolderOutput extends BaseFolderSchema
 {

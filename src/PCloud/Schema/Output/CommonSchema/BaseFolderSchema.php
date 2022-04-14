@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Output\CommonSchema;
+namespace PCloud\PCloud\Schema\Output\CommonSchema;
 
-use App\PCloud\Schema\Core\OutputSchemaTrait;
+use PCloud\PCloud\Schema\Core\OutputSchemaTrait;
 use Attribute;
 use DateTime;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace PCloud\Enum;
 
 enum PCloudMethods: string
 {

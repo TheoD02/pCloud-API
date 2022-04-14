@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PCloud\Schema\Input\Folder\Delete;
+namespace PCloud\PCloud\Schema\Input\Folder\Delete;
 
-use App\PCloud\Adapters\DeleteFolderInterface;
-use App\PCloud\Schema\Core\InputSchemaTrait;
+use PCloud\PCloud\Adapters\DeleteFolderInterface;
+use PCloud\PCloud\Schema\Core\InputSchemaTrait;
 
 class DeleteFolderWithFolderIdInput implements DeleteFolderInterface
 {

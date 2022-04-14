@@ -1,8 +1,8 @@
 <?php
 
-namespace App\PCloud\Schema\Input\File\UploadFile;
+namespace PCloud\PCloud\Schema\Input\File\UploadFile;
 
-use App\PCloud\Adapters\UploadFileInterface;
+use PCloud\PCloud\Adapters\UploadFileInterface;
 
 class UploadFileWithFolderIdInput extends BaseUploadFileInput implements UploadFileInterface
 {
