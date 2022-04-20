@@ -14,8 +14,12 @@ use PCloud\PCloud\Adapters\DeleteFolderInterface;
 use PCloud\PCloud\Adapters\ListFolderInterface;
 use PCloud\PCloud\Adapters\StreamAudioInterface;
 use PCloud\PCloud\Adapters\UploadFileInterface;
+use PCloud\PCloud\Schema\Input\FileOps\FileOpenWithFileIdInput;
+use PCloud\PCloud\Schema\Input\FileOps\FilePReadWithFileIdInput;
+use PCloud\PCloud\Schema\Input\FileOps\FileReadWithFileIdInput;
 use PCloud\PCloud\Schema\Output\File\DeleteFileOutput;
 use PCloud\PCloud\Schema\Output\File\UploadFileOutput;
+use PCloud\PCloud\Schema\Output\FileOps\FileOperationOpenOutput;
 use PCloud\PCloud\Schema\Output\Folder\CreateFolderOutput;
 use PCloud\PCloud\Schema\Output\Folder\DeleteFolderOutput;
 use PCloud\PCloud\Schema\Output\Folder\ListFolderOutput;
@@ -144,5 +148,37 @@ class PCloudService
                 'form_params' => $streamAudioInput->toArray(),
             ])
         );
+    }
+
+    public function fileOperationOpen(FileOpenWithFileIdInput $fileOpenWithFileId)
+    {
+        return (new FileOperationOpenOutput())->setDataFromResponse(
+            $this->request('POST', PCloudMethods::FILE_OPEN, [
+                'query' => $fileOpenWithFileId->toArray(),
+            ])
+        );
+    }
+
+    public function fileOperationRead(FilePReadWithFileIdInput $filePReadWithFileIdInput)
+    {
+        return (new FileOperationOpenOutput())->setDataFromResponse(
+            $this->request('POST', PCloudMethods::FILE_PREAD, [
+                'query' => $filePReadWithFileIdInput->toArray(),
+            ])
+        );
+    }
+
+    public function fileOperationClose(?int $getFd)
+    {
+        return $this->request('POST', PCloudMethods::FILE_CLOSE, [
+            'query' => ['fd' => $getFd],
+        ]);
+    }
+
+    public function fileSize(?int $getFd)
+    {
+        return $this->request('POST', PCloudMethods::FILE_CLOSE, [
+            'query' => ['fd' => $getFd],
+        ]);
     }
 }

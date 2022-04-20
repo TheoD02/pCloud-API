@@ -2,6 +2,7 @@
 
 namespace PCloud\Client;
 
+use GuzzleHttp\Cookie\CookieJar;
 use PCloud\Enum\PCloudServer;
 use GuzzleHttp\Client;
 
@@ -12,7 +13,8 @@ class HttpClientSingleton
     private static function createClient(PCloudServer $server): void
     {
         self::$client = new Client([
-            'base_uri' => $server->value
+            'base_uri' => $server->value,
+            'cookies' => new CookieJar(),
         ]);
     }
 

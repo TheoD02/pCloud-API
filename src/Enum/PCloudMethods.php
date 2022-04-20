@@ -39,4 +39,18 @@ enum PCloudMethods: string
     case EXTRACT_ARCHIVE = 'extractarchive';
     case EXTRACT_ARCHIVE_PROGRESS = 'extractarchiverogress';
     case SAVE_ZIP_PROGRESS = 'saveziprogress';*/
+
+    // FILE OPS
+    case FILE_OPEN = 'file_open';
+    case FILE_WRITE = 'file_WRITE';
+    case FILE_PWRITE = 'file_pwrite';
+    case FILE_READ = 'file_read';
+    case FILE_PREAD = 'file_pread';
+    case FILE_PREAD_IFMOD = 'file_pread_ifmod';
+    case FILE_CHECKSUM = 'file_checksum';
+    case FILE_SIZE = 'file_size';
+    case FILE_TRUNCATE = 'file_truncate';
+    case FILE_SEEK = 'file_seek';
+    case FILE_CLOSE = 'file_close';
+    case FILE_LOCK = 'file_lock';
 }
