@@ -3,6 +3,9 @@
 namespace PCloud\Client;
 
 use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\SessionCookieJar;
+use GuzzleHttp\Handler\CurlMultiHandler;
+use GuzzleHttp\HandlerStack;
 use PCloud\Enum\PCloudServer;
 use GuzzleHttp\Client;
 
@@ -14,7 +17,8 @@ class HttpClientSingleton
     {
         self::$client = new Client([
             'base_uri' => $server->value,
-            'cookies' => new CookieJar(),
+            'cookies' => new SessionCookieJar('key'),
+            'handler' => self::getHandler(),
         ]);
     }
 
@@ -24,5 +28,15 @@ class HttpClientSingleton
             self::createClient($server);
         }
         return self::$client;
+    }
+
+    private static function getHandler(): HandlerStack
+    {
+        return HandlerStack::create(new CurlMultiHandler([
+            'options' => [
+                CURLMOPT_MAX_TOTAL_CONNECTIONS => 50,
+                CURLMOPT_MAX_HOST_CONNECTIONS => 10,
+            ]
+        ]));
     }
 }

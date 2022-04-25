@@ -26,6 +26,7 @@ use PCloud\PCloud\Schema\Output\Folder\ListFolderOutput;
 use PCloud\PCloud\Schema\Output\Streaming\Audio\StreamAudioOutput;
 use PCloud\PCloud\Schema\Output\UserInfoScheme;
 use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
 
 class PCloudService
 {
@@ -54,13 +55,29 @@ class PCloudService
         return $this->userInfo;
     }
 
-    private function request(string $method, PCloudMethods $pCloudMethods, $options)
+    /**
+     * @param string $method
+     * @param PCloudMethods $pCloudMethods
+     * @param $options
+     * @param bool $async
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface|array
+     *
+     * @throws NotLoggedException
+     * @throws PCloudApiError
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
+     */
+    private function request(string $method, PCloudMethods $pCloudMethods, $options, bool $async = false): \GuzzleHttp\Promise\PromiseInterface|array
     {
         if (true === $this->haveAlreadyAttemptLogin && null === $this->userInfo->getAuth()) {
             throw new NotLoggedException('Not logged to pCloud API! Check credentials or API Server.');
         }
         if ($this->userInfo->getAuth()) {
             $options['query']['auth'] = $this->userInfo->getAuth();
+        }
+        if ($async) {
+            return $this->client->requestAsync($method, $pCloudMethods->value, $options);
         }
         $data = json_decode($this->client->request($method, $pCloudMethods->value, $options)->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
         if (0 !== $data['result']) {
@@ -75,7 +92,8 @@ class PCloudService
             'form_params' => [
                 'username' => $username,
                 'password' => $password,
-                'getauth' => 1
+                'getauth' => 1,
+                'logout' => 1,
             ]
         ]);
         $this->haveAlreadyAttemptLogin = true;
@@ -114,22 +132,29 @@ class PCloudService
 
     /**
      * @param UploadFileInterface $uploadFileInput
-     * @return UploadFileOutput
+     * @param bool $async
+     * @return UploadFileOutput|\GuzzleHttp\Promise\PromiseInterface
      * @throws NoFileToUploadException
      * @throws NotLoggedException
      * @throws PCloudApiError
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \JsonException
      * @TODO : Parameters not working with multiple file (not tested with only one file)
      */
-    public function uploadFile(UploadFileInterface $uploadFileInput): UploadFileOutput
+    public function uploadFile(UploadFileInterface $uploadFileInput, bool $async = false): UploadFileOutput|\GuzzleHttp\Promise\PromiseInterface
     {
         if (0 === count($uploadFileInput->getFiles())) {
             throw new NoFileToUploadException('No file was set to upload, please use setFiles() or addFiles() functions.');
         }
+        $request = $this->request('POST', PCloudMethods::UPLOAD_FILE, [
+            'multipart' => $uploadFileInput->toArray(),
+        ]);
+        if ($async) {
+            return $request;
+        }
         return (new UploadFileOutput())->setDataFromResponse(
             $this->request('POST', PCloudMethods::UPLOAD_FILE, [
-                'query' => $uploadFileInput->toArray(),
-                'multipart' => $uploadFileInput->getFiles(),
+                'multipart' => $uploadFileInput->toArray(),
             ])
         );
     }

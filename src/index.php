@@ -2,11 +2,16 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
+use pCloud\App;
 use PCloud\Enum\PCloudFileOperation;
+use PCloud\Enum\PCloudServer;
 use PCloud\PCloud\Schema\Input\FileOps\FileOpenWithFileIdInput;
 use PCloud\PCloud\Schema\Input\FileOps\FilePReadWithFileIdInput;
+use pCloud\Request;
 use PCloud\Service\PCloudService;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\HttpClient\HttpClient;
 
 require '../vendor/autoload.php';
 $dotenv = new Dotenv();
