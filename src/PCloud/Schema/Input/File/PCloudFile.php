@@ -4,18 +4,18 @@ namespace PCloud\PCloud\Schema\Input\File;
 
 class PCloudFile
 {
-    private $contents;
+    private string $content;
 
     /**
-     * @param $contentOrStream
+     * @param string $content
      * @param string $filename
      * @param string|null $path
      * @throws \Exception
      * @TODO : Support other parameters
      */
     public function __construct(
-        $contentOrStream,
-        private string $filename,
+        string          $content,
+        private string  $filename,
         private ?string $path = null,
         //private ?bool $renameIfExist = true,
         //private ?bool $noPartial = true,
@@ -24,30 +24,24 @@ class PCloudFile
         //private ?int $creationTimestamp = null,
     )
     {
-        if (is_resource($contentOrStream)) {
-            $this->contents = $contentOrStream;
-        } else if (is_file($contentOrStream)) {
-            $this->contents = fopen($contentOrStream, 'rb+');
-        } else {
-            throw new \Exception('Not supported yet, need maybe improve here.');
-        }
+        $this->contents = $content;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getContents(): mixed
+    public function getContent(): string
     {
-        return $this->contents;
+        return $this->content;
     }
 
     /**
-     * @param mixed $contents
+     * @param string $content
      * @return PCloudFile
      */
-    public function setContents($contents)
+    public function setContent(string $content)
     {
-        $this->contents = $contents;
+        $this->content = $content;
         return $this;
     }
 
