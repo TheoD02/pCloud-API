@@ -24,7 +24,7 @@ class PCloudFile
         //private ?int $creationTimestamp = null,
     )
     {
-        $this->contents = $content;
+        $this->content = $content;
     }
 
     /**
