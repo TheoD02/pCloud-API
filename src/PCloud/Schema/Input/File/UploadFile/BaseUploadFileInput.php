@@ -24,7 +24,7 @@ class BaseUploadFileInput
         foreach ($this->files as $k => $file) {
             $files[$k] = [
                 'name' => "file-$k",
-                'contents' => is_resource($file->getContents()) ? $file->getContents() : fopen($file->getContents(), 'rb+'),
+                'contents' =>$file->getContents(),
                 'filename' => method_exists($this, 'getPath') ? sprintf('%s/%s', $this->getPath(), $file->getFilename()) : $file->getFilename()
             ];
         }
