@@ -35,10 +35,10 @@ enum PCloudMethods: string
     // ARCHIVING
     case GET_ZIP = 'getzip';
     case GET_ZIP_LINK = 'getziplink';
-    /*case SAVE_ZIP = 'savezip';
+    //case SAVE_ZIP = 'savezip';
     case EXTRACT_ARCHIVE = 'extractarchive';
     case EXTRACT_ARCHIVE_PROGRESS = 'extractarchiverogress';
-    case SAVE_ZIP_PROGRESS = 'saveziprogress';*/
+    //case SAVE_ZIP_PROGRESS = 'saveziprogress';
 
     // FILE OPS
     case FILE_OPEN = 'file_open';

@@ -14,9 +14,11 @@ use PCloud\PCloud\Adapters\DeleteFolderInterface;
 use PCloud\PCloud\Adapters\ListFolderInterface;
 use PCloud\PCloud\Adapters\StreamAudioInterface;
 use PCloud\PCloud\Adapters\UploadFileInterface;
+use PCloud\PCloud\Schema\Input\Archiving\ExtractArchiveWithFileIdInput;
 use PCloud\PCloud\Schema\Input\FileOps\FileOpenWithFileIdInput;
 use PCloud\PCloud\Schema\Input\FileOps\FilePReadWithFileIdInput;
 use PCloud\PCloud\Schema\Input\FileOps\FileReadWithFileIdInput;
+use PCloud\PCloud\Schema\Output\Archiving\ExtractArchiveOutput;
 use PCloud\PCloud\Schema\Output\File\DeleteFileOutput;
 use PCloud\PCloud\Schema\Output\File\UploadFileOutput;
 use PCloud\PCloud\Schema\Output\FileOps\FileOperationOpenOutput;
@@ -171,6 +173,15 @@ class PCloudService
         return (new StreamAudioOutput())->setDataFromResponse(
             $this->request('POST', PCloudMethods::GET_AUDIO_LINK, [
                 'form_params' => $streamAudioInput->toArray(),
+            ])
+        );
+    }
+
+    public function extractZip(ExtractArchiveWithFileIdInput $extractArchiveWithFileIdInput): ExtractArchiveOutput
+    {
+        return (new ExtractArchiveOutput())->setDataFromResponse(
+            $this->request('POST', PCloudMethods::EXTRACT_ARCHIVE, [
+                'query' => $extractArchiveWithFileIdInput->toArray(),
             ])
         );
     }
