@@ -4,18 +4,18 @@ namespace PCloud\PCloud\Schema\Input\File;
 
 class PCloudFile
 {
-    private string $content;
+    private $content;
 
     /**
-     * @param string $content
+     * @param $content
      * @param string $filename
      * @param string|null $path
      * @throws \Exception
      * @TODO : Support other parameters
      */
     public function __construct(
-        string          $content,
-        private string  $filename,
+        $content,
+        private string $filename,
         private ?string $path = null,
         //private ?bool $renameIfExist = true,
         //private ?bool $noPartial = true,
@@ -27,19 +27,16 @@ class PCloudFile
         $this->content = $content;
     }
 
-    /**
-     * @return string
-     */
-    public function getContent(): string
+    public function getContent()
     {
         return $this->content;
     }
 
     /**
-     * @param string $content
+     * @param $content
      * @return PCloudFile
      */
-    public function setContent(string $content)
+    public function setContent($content)
     {
         $this->content = $content;
         return $this;
