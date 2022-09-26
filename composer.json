@@ -17,7 +17,7 @@
     "php": "^8.1",
     "guzzlehttp/guzzle": "^7.4",
     "doctrine/collections": "^1.6",
-    "symfony/http-client": "^5.0",
+    "symfony/http-client": "^5.0|^6.0",
     "ext-curl": "*",
     "symfony/dotenv": "^5.4"
   },
